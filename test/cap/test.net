@@ -1,0 +1,5 @@
+* Spice netlister for gnetlist
+R1 Vin 1 1k
+C1 0 1 1u
+D1 1 Vout 1N4004
+.END

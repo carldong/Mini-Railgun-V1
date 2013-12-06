@@ -1,0 +1,40 @@
+**********************************
+* Model created by               *
+*   Uni.Dipl.-Ing. Arpad Buermen *
+*   arpad.burmen@ieee.org        *
+* Copyright:                     *
+*   Thomatronik GmbH, Germany    *
+*   info@thomatronik.de          *
+**********************************
+* November 2000
+*   SPICE3
+* Bidirectional
+.SUBCKT t15ke100ca 1 2
+DF 9 90 DFMOD TEMP = 25
+.MODEL DFMOD D N = 1 IS = 5E-008 RS = 0.0339481
++ EG = 1.11 XTI = 3
++ CJO = 1.3E-009 VJ = 1.57797 M = 0.5 FC = 0.5
++ TT = 1E-008 TNOM = 25
+* Leakage
+RLF 9 90 1.026E+008 RLMOD
+RLR 1 9 1.026E+008 RLMOD
+.MODEL RLMOD R TC1 = 0 TC2 = 0 TNOM = 25
+* Breakdown
+RBD 90 4 3.30127
+EBD 4 3 10 20 1
+DBD 3 9 DBDMOD TEMP = 25
+* Reverse
+DR 9 1 DFMOD TEMP = 25
+RBDR 1 94 3.30127
+EBDR 94 93 10 20 1
+DBDR 93 9 DBDMOD TEMP = 25
+.MODEL DBDMOD D IS = 1E-015 N = 0.5 TNOM = 25
+IBVC 0 10 0.001
+RBVC 10 0 100000 RBVCMOD
+.MODEL RBVCMOD R TC1 = 0.00075 TNOM = 25
+RBDX 20 23 3.30127
+DBVC 23 22 DBDMOD TEMP = 25
+DBVF 22 0 DFMOD TEMP = 25
+IBVD 0 20 0.001
+L1 90 2 1E-015
+.ENDS

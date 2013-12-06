@@ -1,0 +1,17 @@
+* Test
+*.control
+*tran 10ns 5m
+*gnuplot test-graph v(4) v(2)
+*.endc
+.inc UA555.mod
+x1 0 2 4 1 3 2 5 1 UA555
+v1 1 0 dc 9
+c2 3 0 10pf
+*r4 3 0 10k
+c1 2 0 100nf
+r3 4 0 100k
+r2 5 2 10k
+r1 1 5 10k
+
+.INCLUDE ./Simulation.cmd
+.end
